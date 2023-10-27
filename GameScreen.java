@@ -30,6 +30,7 @@ public class GameScreen extends JFrame {
         JButton newGameButton = new JButton("Nytt spel");
         newGameButton.addActionListener(e -> newGame()); //Händelsehanterare för knappen
         add(newGameButton, BorderLayout.SOUTH);
+
     }
 
     private void createGrid() {
@@ -52,6 +53,7 @@ public class GameScreen extends JFrame {
         // Uppdaterar containern för att visa nya brickor
         tileContainer.revalidate();
         tileContainer.repaint();
+
     }
 
     private void newGame() {
