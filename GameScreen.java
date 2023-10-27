@@ -13,6 +13,8 @@ public class GameScreen extends JFrame {
     // "Container" som håller alla spelplattor
     private final JPanel tileContainer;
 
+    private final GameLogic gameLogic = new GameLogic();
+
     //Lista för brickornas nummer och ordning
     List<Integer> tileNumbers = new ArrayList<>();
 
@@ -34,27 +36,26 @@ public class GameScreen extends JFrame {
     }
 
     private void createGrid() {
-        // Tar bort tidigare brickor från containern
         tileContainer.removeAll();
+        tileNumbers.clear(); // Rensa och återskapa listan
 
         // Skapa en lista med nummer för varje bricka
         for (int i = 0; i < NUM_TILES; i++) {
             tileNumbers.add(i);
         }
 
-        // Blandar siffrorna
-        Collections.shuffle(tileNumbers);
+        // Använder GameLogic för att blanda siffrorna
+        gameLogic.shuffleTiles(tileNumbers);
 
         // Lägger till brickorna till containern
         for (Integer number : tileNumbers) {
             tileContainer.add(createTile(number));
         }
 
-        // Uppdaterar containern för att visa nya brickor
         tileContainer.revalidate();
         tileContainer.repaint();
-
     }
+
 
     private void newGame() {
         createGrid();  // Initialiserar spelbrädet igen för nytt spel
