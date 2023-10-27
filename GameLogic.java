@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameLogic {
-    List<Integer> inOrderList;
+    private List<Integer> inOrderList;
 
     public GameLogic() {
         createInOrderList();
@@ -18,7 +18,7 @@ public class GameLogic {
         this.inOrderList = inOrderList;
     }
 
-    //Jämför tileList med en Lista i nummerordning
+    //Jämför tileList med en lista i nummerordning
     public boolean checkNumericalOrder(List<Integer> tileNumbers) {
         return inOrderList.equals(tileNumbers);
     }
