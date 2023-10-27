@@ -65,4 +65,11 @@ public class GameScreen extends JFrame {
         }
         return new JButton(buttonText);
     }
+    public static int getGridSize() {
+        return GRID_SIZE;
+    }
+
+    public static int getNumTiles() {
+        return NUM_TILES;
+    }
 }
