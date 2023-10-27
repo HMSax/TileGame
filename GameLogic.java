@@ -1,7 +1,13 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameLogic {
+
+
+    public void shuffleTiles(List<Integer> tileNumbers) {
+        Collections.shuffle(tileNumbers);
+    }
     private List<Integer> inOrderList;
 
     public GameLogic() {
