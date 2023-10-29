@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class GameScreen extends JFrame {
 
@@ -60,13 +61,35 @@ public class GameScreen extends JFrame {
     private void newGame() {
         createGrid();  // Initialiserar spelbrädet igen för nytt spel
     }
+    private void updateGrid(){ //Uppdaterar spelbrädet
+        tileContainer.removeAll();
+        for (Integer number : tileNumbers) {
+            tileContainer.add(createTile(number));
+        }
+        tileContainer.revalidate();
+        tileContainer.repaint();
+    }
 
-    private JButton createTile(int number) {
+    private JButton createTile(int number) {          //Skapar upp en knapp
         String buttonText = "";
         if (number != 0) {
             buttonText = Integer.toString(number);
+
         }
-        return new JButton(buttonText);
+        JButton newJButton = new JButton(buttonText);
+
+        newJButton.addActionListener(l -> {         // Byter plats på nummer i listan och återskapar spelbrädet
+            if (!Objects.equals(l.getActionCommand(), "")) {
+                int clickedPosition = tileNumbers.indexOf(Integer.parseInt(l.getActionCommand()));
+                int zeroPosition = tileNumbers.indexOf(0);
+                if (clickedPosition == zeroPosition + 1 || clickedPosition == zeroPosition + GRID_SIZE ||
+                        clickedPosition == zeroPosition - 1 || clickedPosition == zeroPosition - GRID_SIZE) {
+                    Collections.swap(tileNumbers, zeroPosition, clickedPosition);
+                    updateGrid();
+                }
+            }
+        });
+        return newJButton;
     }
     public static int getGridSize() {
         return GRID_SIZE;
