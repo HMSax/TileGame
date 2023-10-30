@@ -61,7 +61,8 @@ public class GameScreen extends JFrame {
     private void newGame() {
         createGrid();  // Initialiserar spelbrädet igen för nytt spel
     }
-    private void updateGrid(){ //Uppdaterar spelbrädet
+
+    private void updateGrid() { //Uppdaterar spelbrädet
         tileContainer.removeAll();
         for (Integer number : tileNumbers) {
             tileContainer.add(createTile(number));
@@ -82,8 +83,7 @@ public class GameScreen extends JFrame {
             if (!Objects.equals(l.getActionCommand(), "")) {
                 int clickedPosition = tileNumbers.indexOf(Integer.parseInt(l.getActionCommand()));
                 int zeroPosition = tileNumbers.indexOf(0);
-                if (clickedPosition == zeroPosition + 1 || clickedPosition == zeroPosition + GRID_SIZE ||
-                        clickedPosition == zeroPosition - 1 || clickedPosition == zeroPosition - GRID_SIZE) {
+                if (gameLogic.tileCanBeSwapped(clickedPosition, zeroPosition)) {
                     Collections.swap(tileNumbers, zeroPosition, clickedPosition);
                     updateGrid();
                 }
@@ -91,6 +91,7 @@ public class GameScreen extends JFrame {
         });
         return newJButton;
     }
+
     public static int getGridSize() {
         return GRID_SIZE;
     }

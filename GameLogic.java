@@ -8,6 +8,7 @@ public class GameLogic {
     public void shuffleTiles(List<Integer> tileNumbers) {
         Collections.shuffle(tileNumbers);
     }
+
     private List<Integer> inOrderList;
 
     public GameLogic() {
@@ -29,4 +30,21 @@ public class GameLogic {
         return inOrderList.equals(tileNumbers);
     }
 
+    //undersöker om brickan kan byta plats med den tomma brickan
+    public boolean tileCanBeSwapped(int clickedPosition, int zeroPosition) {
+        boolean swappable = false;
+
+        for (int i = 1; i < GameScreen.getNumTiles() / GameScreen.getGridSize(); i++) {
+            if ((clickedPosition == i * GameScreen.getGridSize() && zeroPosition == clickedPosition - 1) ||
+                    (zeroPosition == i * GameScreen.getGridSize() && clickedPosition == zeroPosition - 1)) {
+                return swappable;
+            }
+        }
+
+        if (clickedPosition == zeroPosition + 1 || clickedPosition == zeroPosition + GameScreen.getGridSize() ||
+                clickedPosition == zeroPosition - 1 || clickedPosition == zeroPosition - GameScreen.getGridSize()) {
+            swappable = true;
+        }
+        return swappable;
+    }
 }
