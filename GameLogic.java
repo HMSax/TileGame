@@ -18,7 +18,7 @@ public class GameLogic {
     //Skapar en lista i nummerordning med 0 sist
     public void createInOrderList() {
         List<Integer> inOrderList = new ArrayList<>();
-        for (int i = 0; i < GameScreen.getNumTiles(); i++) {
+        for (int i = 1; i < GameScreen.getNumTiles(); i++) {
             inOrderList.add(i);
         }
         inOrderList.add(0);
