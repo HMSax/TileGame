@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,7 +81,41 @@ public class GameScreen extends JFrame {
         }
         JButton newJButton = new JButton(buttonText);
 
-        newJButton.addActionListener(l -> {         // Byter plats på nummer i listan och återskapar spelbrädet
+        newJButton.setOpaque(true);
+        newJButton.setBorderPainted(true); // Gränsen är alltid synlig
+        newJButton.setFocusPainted(false);
+        newJButton.setContentAreaFilled(true);
+
+        // Sätt bakgrund och ram
+        newJButton.setBackground(Color.WHITE);
+        newJButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
+
+        // MouseListener för att ändra färg vid hover
+        String finalButtonText = buttonText;
+        newJButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                int zeroPosition = tileNumbers.indexOf(0);
+                int currentTilePosition = tileNumbers.indexOf(number);
+
+                if (!finalButtonText.isEmpty()) {
+                    if (gameLogic.tileCanBeSwapped(currentTilePosition, zeroPosition)) {
+                        // Grön om brickan kan flyttas
+                        newJButton.setBackground(new Color(131, 191, 137)); // Grön färg
+                    } else {
+                        // Duvblå om brickan inte kan flyttas
+                        newJButton.setBackground(new Color(175, 198, 233)); // Duvblå färg
+                    }
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                newJButton.setBackground(Color.WHITE); // Vit igen när musen inte är över
+            }
+        });
+
+        newJButton.addActionListener(l -> {
             if (!Objects.equals(l.getActionCommand(), "")) {
                 int clickedPosition = tileNumbers.indexOf(Integer.parseInt(l.getActionCommand()));
                 int zeroPosition = tileNumbers.indexOf(0);
@@ -89,6 +125,7 @@ public class GameScreen extends JFrame {
                 }
             }
         });
+
         return newJButton;
     }
 
