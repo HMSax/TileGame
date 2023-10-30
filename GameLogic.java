@@ -34,13 +34,11 @@ public class GameLogic {
     public boolean tileCanBeSwapped(int clickedPosition, int zeroPosition) {
         boolean swappable = false;
 
-        if ((clickedPosition == GameScreen.getGridSize() && zeroPosition == clickedPosition - 1) ||
-                (zeroPosition == GameScreen.getGridSize() && clickedPosition == zeroPosition - 1) ||
-                (clickedPosition == 2 * GameScreen.getGridSize() && zeroPosition == clickedPosition - 1) ||
-                (zeroPosition == 2 * GameScreen.getGridSize() && clickedPosition == zeroPosition - 1) ||
-                (clickedPosition == 3 * GameScreen.getGridSize() && zeroPosition == clickedPosition - 1) ||
-                (zeroPosition == 3 * GameScreen.getGridSize() && clickedPosition == zeroPosition - 1)) {
-            return swappable;
+        for (int i = 1; i < GameScreen.getNumTiles() / GameScreen.getGridSize(); i++) {
+            if ((clickedPosition == i * GameScreen.getGridSize() && zeroPosition == clickedPosition - 1) ||
+                    (zeroPosition == i * GameScreen.getGridSize() && clickedPosition == zeroPosition - 1)) {
+                return swappable;
+            }
         }
 
         if (clickedPosition == zeroPosition + 1 || clickedPosition == zeroPosition + GameScreen.getGridSize() ||

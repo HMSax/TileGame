@@ -61,7 +61,8 @@ public class GameScreen extends JFrame {
     private void newGame() {
         createGrid();  // Initialiserar spelbrädet igen för nytt spel
     }
-    private void updateGrid(){ //Uppdaterar spelbrädet
+
+    private void updateGrid() { //Uppdaterar spelbrädet
         tileContainer.removeAll();
         for (Integer number : tileNumbers) {
             tileContainer.add(createTile(number));
@@ -90,6 +91,7 @@ public class GameScreen extends JFrame {
         });
         return newJButton;
     }
+
     public static int getGridSize() {
         return GRID_SIZE;
     }
