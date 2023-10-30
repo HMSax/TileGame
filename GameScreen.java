@@ -24,6 +24,7 @@ public class GameScreen extends JFrame {
     public GameScreen() {
         setTitle("Tile Game");
         setSize(500, 500);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -123,6 +124,8 @@ public class GameScreen extends JFrame {
                     Collections.swap(tileNumbers, zeroPosition, clickedPosition);
                     updateGrid();
                     if (gameLogic.checkNumericalOrder(tileNumbers)) {
+                        UIManager.put("OptionPane.background", Color.WHITE);
+                        UIManager.put("Panel.background", Color.white);
                         JOptionPane.showMessageDialog(null, "Grattis! Du vann!",
                                 "TileGame", JOptionPane.INFORMATION_MESSAGE);
                     }
