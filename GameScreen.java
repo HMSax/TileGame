@@ -86,6 +86,10 @@ public class GameScreen extends JFrame {
                 if (gameLogic.tileCanBeSwapped(clickedPosition, zeroPosition)) {
                     Collections.swap(tileNumbers, zeroPosition, clickedPosition);
                     updateGrid();
+                    if (gameLogic.checkNumericalOrder(tileNumbers)) {
+                        JOptionPane.showMessageDialog(null, "Grattis! Du vann!",
+                                "TileGame", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         });
