@@ -82,8 +82,7 @@ public class GameScreen extends JFrame {
             if (!Objects.equals(l.getActionCommand(), "")) {
                 int clickedPosition = tileNumbers.indexOf(Integer.parseInt(l.getActionCommand()));
                 int zeroPosition = tileNumbers.indexOf(0);
-                if (clickedPosition == zeroPosition + 1 || clickedPosition == zeroPosition + GRID_SIZE ||
-                        clickedPosition == zeroPosition - 1 || clickedPosition == zeroPosition - GRID_SIZE) {
+                if (gameLogic.tileCanBeSwapped(clickedPosition, zeroPosition)) {
                     Collections.swap(tileNumbers, zeroPosition, clickedPosition);
                     updateGrid();
                 }
