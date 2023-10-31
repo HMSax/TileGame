@@ -45,13 +45,30 @@ public class GameScreen extends JFrame {
         tileContainer.removeAll();
         tileNumbers.clear(); // Rensa och återskapa listan
 
-        // Skapa en lista med nummer för varje bricka
-        for (int i = 0; i < NUM_TILES; i++) {
-            tileNumbers.add(i);
-         }
+        //Presentationsläge Ja/Nej
+        UIManager.put("OptionPane.background", Color.WHITE);
+        UIManager.put("Panel.background", Color.white);
+        int presentation = JOptionPane.showConfirmDialog(
+                null,"Vill du köra TileGame i presentationsläge?",
+                "TileGame", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        // Använder GameLogic för att blanda siffrorna
-        gameLogic.shuffleTiles(tileNumbers);
+        if (presentation == JOptionPane.YES_OPTION){
+            //Skapar en sorterad lista för presentation av spelet
+            for (int i = 1; i < NUM_TILES; i++) {
+                tileNumbers.add(i);
+            }
+            tileNumbers.add(0);
+        }
+
+        else {
+            // Skapa en lista med nummer för varje bricka
+            for (int i = 0; i < NUM_TILES; i++) {
+                tileNumbers.add(i);
+            }
+
+            // Använder GameLogic för att blanda siffrorna
+            gameLogic.shuffleTiles(tileNumbers);
+        }
 
         // Lägger till brickorna till containern
         for (Integer number : tileNumbers) {
