@@ -34,7 +34,9 @@ public class GameScreen extends JFrame {
 
         // Knapp för nytt spel
         JButton newGameButton = new JButton("Nytt spel");
-        newGameButton.addActionListener(e -> newGame()); //Händelsehanterare för knappen
+        newGameButton.setPreferredSize(new Dimension(newGameButton.getPreferredSize().width, 50)); // Sätt höjden till 50 px
+        styleButton(newGameButton);  // Lägger till stilen här
+        newGameButton.addActionListener(e -> newGame()); // Händelsehanterare för knappen
         add(newGameButton, BorderLayout.SOUTH);
 
     }
@@ -134,6 +136,28 @@ public class GameScreen extends JFrame {
         });
 
         return newJButton;
+    }
+
+    private void styleButton(JButton button) {
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(true);
+        button.setBackground(Color.WHITE);
+        button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
+
+        // MouseListener för att ändra färg vid hover
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(new Color(131, 191, 137)); // Grön färg vid hover
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(Color.WHITE); // Vit igen när musen inte är över
+            }
+        });
     }
 
     public static int getGridSize() {
