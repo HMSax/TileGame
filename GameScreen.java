@@ -48,7 +48,7 @@ public class GameScreen extends JFrame {
         // Skapa en lista med nummer för varje bricka
         for (int i = 0; i < NUM_TILES; i++) {
             tileNumbers.add(i);
-        }
+         }
 
         // Använder GameLogic för att blanda siffrorna
         gameLogic.shuffleTiles(tileNumbers);
