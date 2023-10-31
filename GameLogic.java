@@ -4,19 +4,13 @@ import java.util.List;
 
 public class GameLogic {
 
-
-    public void shuffleTiles(List<Integer> tileNumbers) {
-        Collections.shuffle(tileNumbers);
-    }
-
     private List<Integer> inOrderList;
 
     public GameLogic() {
         createInOrderList();
     }
 
-    //Skapar en lista i nummerordning med 0 sist
-    public void createInOrderList() {
+    public void createInOrderList() {    //Skapar en lista i nummerordning med 0 sist
         List<Integer> inOrderList = new ArrayList<>();
         for (int i = 1; i < GameScreen.getNumTiles(); i++) {
             inOrderList.add(i);
@@ -25,10 +19,17 @@ public class GameLogic {
         this.inOrderList = inOrderList;
     }
 
+    //blandar om det aktuella spelbrädets nummerlista
+    public void shuffleTiles(List<Integer> tileNumbers) {
+        Collections.shuffle(tileNumbers);
+    }
+
+
     //Jämför tileList med en lista i nummerordning
     public boolean checkNumericalOrder(List<Integer> tileNumbers) {
         return inOrderList.equals(tileNumbers);
     }
+
 
     //undersöker om brickan kan byta plats med den tomma brickan
     public boolean tileCanBeSwapped(int clickedPosition, int zeroPosition) {
